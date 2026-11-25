@@ -1,0 +1,15 @@
+{
+  "_source": "Display snapshots copied from contract/seed/s1-identity.json (ids ...0008 and ...0009). Stored locally so S4 never calls S1.",
+  "tow_drivers": [
+    {
+      "userId": "00000000-0000-4000-8000-000000000008",
+      "fullName": "Remorquage Yacine",
+      "phone": "0555000008"
+    },
+    {
+      "userId": "00000000-0000-4000-8000-000000000009",
+      "fullName": "Remorquage Amine",
+      "phone": "0555000009"
+    }
+  ]
+}
