@@ -1,5 +1,9 @@
 # DriveFix
 
+> **New to the team? Read [`START_HERE.md`](START_HERE.md) first.** It walks you step by step from cloning
+> the repository to opening your first pull request: what to install, what to read, the rules, and the checklist
+> before you say "done".
+
 Spare-parts marketplace, mechanic booking and SOS towing for Algeria, in one web platform.
 Graduation project (defence on 30/11/2026). The web app supports six roles (driver, parts supplier,
 mechanic, tow driver, dispatcher, admin) in Arabic (RTL), French and English.
@@ -47,6 +51,7 @@ mechanic, tow driver, dispatcher, admin) in Arabic (RTL), French and English.
 │   ├── INTEGRATION.md     How to connect your service to the frontend (start here, teammates)
 │   ├── specs/             Business rules: backend spec per service (.docx)
 │   └── ai-prompts/        The AI prompts that built parts of this repo, and which part each built
+├── START_HERE.md          Team guide: read this first
 ├── CONTRIBUTING.md        Git workflow for the team (branches, commits, pull requests)
 └── README.md              This file
 ```
@@ -103,6 +108,7 @@ Building one of S2 to S6? Read [`services/README.md`](services/README.md), then 
 
 | Document | For |
 | --- | --- |
+| [`START_HERE.md`](START_HERE.md) | Teammates: **read first**. Setup, what to read, rules, done checklist |
 | [`docs/INTEGRATION.md`](docs/INTEGRATION.md) | Teammates: connect your service to the frontend, common mistakes, definition of done |
 | [`contract/README.md`](contract/README.md) | Rules every service follows (auth, errors, pagination, error codes) |
 | [`contract/CHANGELOG.md`](contract/CHANGELOG.md) | What changed in the contract since v1.0 |
