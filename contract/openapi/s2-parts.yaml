@@ -1,0 +1,856 @@
+openapi: 3.0.3
+info:
+  title: DriveFix Parts
+  version: 1.1.0
+  description: Catalog, supplier offers, stock, orders (split per supplier), reviews.
+servers:
+- url: http://localhost:4002/api/v1
+tags:
+- name: S2
+paths:
+  /parts:
+    get:
+      summary: Search catalog
+      tags:
+      - S2
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: brand
+        in: query
+        schema:
+          type: string
+      - name: category
+        in: query
+        schema:
+          type: string
+      - name: vehicle
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Part'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+  /parts/{id}:
+    get:
+      summary: Part with active offers sorted by price
+      tags:
+      - S2
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  part:
+                    type: object
+                  offers:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - part
+                - offers
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /parts/compare:
+    get:
+      summary: Compare up to 3 offers side by side
+      tags:
+      - S2
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: ids
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - items
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /offers:
+    get:
+      summary: Own offers
+      tags:
+      - S2
+      description: 'Roles: SUPPLIER (approved)'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Offer'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create an offer
+      tags:
+      - S2
+      description: 'Roles: SUPPLIER (approved)'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                partId:
+                  type: string
+                  format: uuid
+                price:
+                  type: integer
+                stock:
+                  type: integer
+                condition:
+                  type: string
+                  enum:
+                  - NEW
+                  - USED
+                warrantyMonths:
+                  type: integer
+                deliveryWilayas:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - partId
+              - price
+              - stock
+              - condition
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /offers/{id}:
+    patch:
+      summary: Edit own offer
+      tags:
+      - S2
+      description: 'Roles: SUPPLIER (approved)'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: integer
+                stock:
+                  type: integer
+                warrantyMonths:
+                  type: integer
+                active:
+                  type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete own offer (409 if it sits in an open order, deactivate instead)
+      tags:
+      - S2
+      description: 'Roles: SUPPLIER (approved)'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /orders:
+    post:
+      summary: Place an order from the cart
+      tags:
+      - S2
+      description: 'Roles: DRIVER'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                deliveryAddress:
+                  type: string
+                wilaya:
+                  type: string
+                paymentMethod:
+                  type: string
+                  enum:
+                  - CASH
+                  - SANDBOX
+              required:
+              - items
+              - deliveryAddress
+              - wilaya
+              - paymentMethod
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: 'Own orders (supplier: orders with their items)'
+      tags:
+      - S2
+      description: 'Roles: DRIVER, SUPPLIER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /orders/{id}:
+    get:
+      summary: Order detail
+      tags:
+      - S2
+      description: 'Roles: DRIVER, SUPPLIER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /orders/{id}/status:
+    patch:
+      summary: Legal transitions only
+      tags:
+      - S2
+      description: 'Roles: SUPPLIER, DRIVER, ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - CONFIRMED
+                  - SHIPPED
+                  - DELIVERED
+                  - CANCELLED
+                reason:
+                  type: string
+              required:
+              - status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /orders/{id}/review:
+    post:
+      summary: One review per delivered order
+      tags:
+      - S2
+      description: 'Roles: DRIVER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                comment:
+                  type: string
+              required:
+              - rating
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /suppliers/{id}/reviews:
+    get:
+      summary: Reviews and average rating
+      tags:
+      - S2
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average:
+                    type: number
+                  items:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - average
+                - items
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /internal/payments/{orderId}/result:
+    post:
+      summary: Callback from S5 (PAID or FAILED)
+      tags:
+      - S2
+      description: 'Roles: service-to-service (X-Service-Key header)'
+      security:
+      - serviceKey: []
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - PAID
+                  - FAILED
+              required:
+              - status
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceKey:
+      type: apiKey
+      in: header
+      name: X-Service-Key
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: OTP_EXPIRED
+            message:
+              type: string
+            field:
+              type: string
+          required:
+          - code
+          - message
+    Part:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        brand:
+          type: string
+        category:
+          type: string
+        reference:
+          type: string
+        compatibleVehicles:
+          type: array
+          items:
+            type: string
+        imageUrl:
+          type: string
+      required:
+      - id
+      - name
+      - brand
+      - category
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        partId:
+          type: string
+          format: uuid
+        supplierId:
+          type: string
+          format: uuid
+        price:
+          type: integer
+        stock:
+          type: integer
+        condition:
+          type: string
+          enum:
+          - NEW
+          - USED
+        warrantyMonths:
+          type: integer
+        deliveryWilayas:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+      required:
+      - id
+      - partId
+      - supplierId
+      - price
+      - stock
+      - condition
+      - active
+    OrderItem:
+      type: object
+      properties:
+        offerId:
+          type: string
+          format: uuid
+        supplierId:
+          type: string
+          format: uuid
+        qty:
+          type: integer
+        unitPrice:
+          type: integer
+      required:
+      - offerId
+      - supplierId
+      - qty
+      - unitPrice
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        driverId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+          - SHIPPED
+          - DELIVERED
+          - CANCELLED
+        paymentMethod:
+          type: string
+          enum:
+          - CASH
+          - SANDBOX
+        deliveryAddress:
+          type: string
+        wilaya:
+          type: string
+        deliveryFee:
+          type: integer
+        total:
+          type: integer
+        items:
+          type: array
+          items:
+            type: object
+        createdAt:
+          type: string
+          format: date-time
+        payUrl:
+          type: string
+          description: 'v1.1, optional. Only for SANDBOX orders still PENDING: the sandbox payment page
+            URL returned by S5 POST /payments (frontend route /pay/{token}). Omit it otherwise.'
+      required:
+      - id
+      - driverId
+      - status
+      - paymentMethod
+      - deliveryAddress
+      - wilaya
+      - deliveryFee
+      - total
+      - items
+      - createdAt
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderId:
+          type: string
+          format: uuid
+        supplierId:
+          type: string
+          format: uuid
+        rating:
+          type: integer
+        comment:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - orderId
+      - supplierId
+      - rating
+      - createdAt

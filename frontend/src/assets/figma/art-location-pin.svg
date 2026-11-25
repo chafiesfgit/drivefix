@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Art / Location pin">
+<ellipse id="Ripple 1" cx="130" cy="214" rx="100" ry="24" stroke-width="1.5" stroke="white" stroke-opacity="0.5"/>
+<ellipse id="Ripple 2" cx="130" cy="214" rx="66" ry="16" stroke-width="1.2" stroke="white" stroke-opacity="0.4"/>
+<ellipse id="Shadow" cx="130" cy="214" rx="38" ry="9" fill="white" fill-opacity="0.28"/>
+<path id="Pin" d="M130 206C130 206 62 146 62 98C62 60 92 30 130 30C168 30 198 60 198 98C198 146 130 206 130 206Z" fill="white" fill-opacity="0.2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.9"/>
+<circle id="Pin dot" cx="130" cy="98" r="26" fill="white" fill-opacity="0.95"/>
+</g>
+</svg>

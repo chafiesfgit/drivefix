@@ -1,0 +1,41 @@
+{
+  "tow_drivers": [
+    {
+      "userId": "00000000-0000-4000-8000-000000000008",
+      "plate": "00123-116-16",
+      "truckType": "Flatbed",
+      "available": true,
+      "lat": 36.7538,
+      "lng": 3.0588
+    },
+    {
+      "userId": "00000000-0000-4000-8000-000000000009",
+      "plate": "00456-117-16",
+      "truckType": "Hook",
+      "available": true,
+      "lat": 36.7119,
+      "lng": 3.195
+    }
+  ],
+  "tow_requests": [
+    {
+      "id": "00000000-0000-4000-8000-000000000601",
+      "driverId": "00000000-0000-4000-8000-000000000003",
+      "trackingCode": "SOS-DEMO01",
+      "pickupLat": 36.7372,
+      "pickupLng": 3.0865,
+      "pickupAddress": "Autoroute Est-Ouest, Alger",
+      "vehicle": "Clio 4",
+      "issue": "Engine will not start",
+      "urgency": "URGENT",
+      "status": "SEARCHING"
+    }
+  ],
+  "config": {
+    "offerTimeoutSeconds": 30,
+    "maxOffers": 3,
+    "baseFee": 3000,
+    "perKm": 120,
+    "hotline": "+213 555 000 000"
+  }
+}

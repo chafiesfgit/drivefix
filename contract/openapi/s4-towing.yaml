@@ -1,0 +1,832 @@
+openapi: 3.0.3
+info:
+  title: DriveFix Towing
+  version: 1.1.0
+  description: SOS requests, sequential dispatch with 30 s offers, tracking, dispatcher board.
+servers:
+- url: http://localhost:4004/api/v1
+tags:
+- name: S4
+paths:
+  /tows:
+    post:
+      summary: Create SOS request and start dispatch
+      tags:
+      - S4
+      description: 'Roles: DRIVER or guest (phone required, no token)'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pickupLat:
+                  type: number
+                pickupLng:
+                  type: number
+                pickupAddress:
+                  type: string
+                destinationAddress:
+                  type: string
+                vehicle:
+                  type: string
+                issue:
+                  type: string
+                urgency:
+                  type: string
+                  enum:
+                  - NORMAL
+                  - URGENT
+                guestPhone:
+                  type: string
+              required:
+              - pickupLat
+              - pickupLng
+              - urgency
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowRequest'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tows/{id}:
+    get:
+      summary: Status, driver, ETA, last position
+      tags:
+      - S4
+      description: 'Roles: owner, assigned TOW_DRIVER, DISPATCHER, or trackingCode'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trackingCode
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  request:
+                    type: object
+                  towDriver:
+                    type: object
+                  lastPosition:
+                    type: object
+                required:
+                - request
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tows/{id}/cancel:
+    post:
+      summary: Cancel before pickup
+      tags:
+      - S4
+      description: 'Roles: owner, DISPATCHER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowRequest'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tow-drivers/me/availability:
+    put:
+      summary: Go online or offline
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER (approved)'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                available:
+                  type: boolean
+              required:
+              - available
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available:
+                    type: boolean
+                required:
+                - available
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tow-drivers/me/position:
+    put:
+      summary: Send position every 5-10 s while online
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lat:
+                  type: number
+                lng:
+                  type: number
+              required:
+              - lat
+              - lng
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tow-drivers/me/offer:
+    get:
+      summary: Current open offer, with seconds left (404 if none)
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowOffer'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tow-offers/{id}/accept:
+    post:
+      summary: Accept within 30 s, first accept wins
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowRequest'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tow-offers/{id}/decline:
+    post:
+      summary: Decline, dispatch moves to next driver
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tows/{id}/status:
+    patch:
+      summary: EN_ROUTE, ARRIVED, COMPLETED
+      tags:
+      - S4
+      description: 'Roles: TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - EN_ROUTE
+                  - ARRIVED
+                  - COMPLETED
+              required:
+              - status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowRequest'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tows/{id}/track:
+    get:
+      summary: Latest position and short trail
+      tags:
+      - S4
+      description: 'Roles: owner, DISPATCHER, or trackingCode'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trackingCode
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last:
+                    type: object
+                  trail:
+                    type: array
+                    items:
+                      type: object
+                  etaMinutes:
+                    type: integer
+                required:
+                - last
+                - trail
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /dispatch/tows:
+    get:
+      summary: Live board
+      tags:
+      - S4
+      description: 'Roles: DISPATCHER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TowRequest'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /dispatch/tows/{id}/assign:
+    post:
+      summary: Manual assignment
+      tags:
+      - S4
+      description: 'Roles: DISPATCHER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                towDriverId:
+                  type: string
+                  format: uuid
+              required:
+              - towDriverId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TowRequest'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /dispatch/tow-drivers:
+    get:
+      summary: 'v1.1, optional: tow drivers with position and busy flag (dispatcher fleet map)'
+      tags:
+      - S4
+      description: 'Roles: DISPATCHER, ADMIN'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TowDriverSummary'
+                required:
+                - items
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /internal/payments/{towId}/result:
+    post:
+      summary: Callback from S5
+      tags:
+      - S4
+      description: 'Roles: service-to-service (X-Service-Key header)'
+      security:
+      - serviceKey: []
+      parameters:
+      - name: towId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - PAID
+                  - FAILED
+              required:
+              - status
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceKey:
+      type: apiKey
+      in: header
+      name: X-Service-Key
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: OTP_EXPIRED
+            message:
+              type: string
+            field:
+              type: string
+          required:
+          - code
+          - message
+    TowRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        driverId:
+          type: string
+          format: uuid
+        guestPhone:
+          type: string
+        trackingCode:
+          type: string
+        pickupLat:
+          type: number
+        pickupLng:
+          type: number
+        pickupAddress:
+          type: string
+        destinationAddress:
+          type: string
+        vehicle:
+          type: string
+        issue:
+          type: string
+        urgency:
+          type: string
+          enum:
+          - NORMAL
+          - URGENT
+        status:
+          type: string
+          enum:
+          - SEARCHING
+          - ASSIGNED
+          - EN_ROUTE
+          - ARRIVED
+          - COMPLETED
+          - CANCELLED
+          - NO_DRIVER
+        estimatedPrice:
+          type: integer
+        assignedTowDriverId:
+          type: string
+          format: uuid
+        etaMinutes:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - trackingCode
+      - pickupLat
+      - pickupLng
+      - urgency
+      - status
+      - createdAt
+    TowDriverSummary:
+      type: object
+      description: v1.1
+      properties:
+        userId:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        plate:
+          type: string
+        truckType:
+          type: string
+        available:
+          type: boolean
+        busy:
+          type: boolean
+          description: Has an open offer or an active job
+        lat:
+          type: number
+        lng:
+          type: number
+        positionAt:
+          type: string
+          format: date-time
+      required:
+      - userId
+      - available
+      - busy
+    TowOffer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        requestId:
+          type: string
+          format: uuid
+        pickupAddress:
+          type: string
+        distanceKm:
+          type: number
+        estimatedPrice:
+          type: integer
+        secondsLeft:
+          type: integer
+        status:
+          type: string
+          enum:
+          - OFFERED
+          - ACCEPTED
+          - DECLINED
+          - EXPIRED
+      required:
+      - id
+      - requestId
+      - secondsLeft
+      - status
+    Position:
+      type: object
+      properties:
+        lat:
+          type: number
+        lng:
+          type: number
+        at:
+          type: string
+          format: date-time
+      required:
+      - lat
+      - lng
+      - at

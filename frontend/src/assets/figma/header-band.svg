@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1440" height="218" viewBox="0 0 1440 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Header band" clip-path="url(#clip0_0_22)">
+<rect width="1440" height="218" fill="#071A3A"/>
+<ellipse id="Glow" cx="720" cy="288" rx="650" ry="320" fill="url(#paint0_radial_0_22)"/>
+<circle id="Arc" cx="720" cy="798" r="699.5" stroke="#FFBE8C" stroke-opacity="0.4"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_22" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 288) scale(1300 640)">
+<stop stop-color="#F26A1B" stop-opacity="0.85"/>
+<stop offset="0.45" stop-color="#F26A1B" stop-opacity="0.3"/>
+<stop offset="0.75" stop-color="#0B2A5B" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="clip0_0_22">
+<rect width="1440" height="218" fill="white"/>
+</clipPath>
+</defs>
+</svg>

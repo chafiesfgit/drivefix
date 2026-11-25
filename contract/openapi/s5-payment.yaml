@@ -1,0 +1,447 @@
+openapi: 3.0.3
+info:
+  title: DriveFix Payment
+  version: 1.1.0
+  description: 'Payments for orders and tows: cash on delivery and sandbox page (demo, no real money).'
+servers:
+- url: http://localhost:4005/api/v1
+tags:
+- name: S5
+paths:
+  /payments:
+    post:
+      summary: Create a payment (idempotent per refType+refId). SANDBOX returns payUrl
+      tags:
+      - S5
+      description: 'Roles: service-to-service (X-Service-Key header)'
+      security:
+      - serviceKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refType:
+                  type: string
+                  enum:
+                  - ORDER
+                  - TOW
+                refId:
+                  type: string
+                  format: uuid
+                payerId:
+                  type: string
+                  format: uuid
+                amount:
+                  type: integer
+                method:
+                  type: string
+                  enum:
+                  - CASH
+                  - SANDBOX
+                label:
+                  type: string
+              required:
+              - refType
+              - refId
+              - payerId
+              - amount
+              - method
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment:
+                    type: object
+                  payUrl:
+                    type: string
+                required:
+                - payment
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: List or find by refId
+      tags:
+      - S5
+      description: 'Roles: owner, ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: refId
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/{id}:
+    get:
+      summary: Payment detail
+      tags:
+      - S5
+      description: 'Roles: owner, ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pay/{token}:
+    get:
+      summary: Data for the sandbox page
+      tags:
+      - S5
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                  label:
+                    type: string
+                  expiresAt:
+                    type: string
+                    format: date-time
+                  demo:
+                    type: boolean
+                required:
+                - amount
+                - label
+                - expiresAt
+                - demo
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pay/{token}/succeed:
+    post:
+      summary: Simulate success (demo only)
+      tags:
+      - S5
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pay/{token}/fail:
+    post:
+      summary: Simulate failure (demo only)
+      tags:
+      - S5
+      description: 'Roles: anyone (no token)'
+      security: []
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/{id}/cash-collected:
+    post:
+      summary: Mark cash received
+      tags:
+      - S5
+      description: 'Roles: SUPPLIER, TOW_DRIVER'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/{id}/refund:
+    post:
+      summary: Mark REFUNDED, reason required
+      tags:
+      - S5
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+              required:
+              - reason
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceKey:
+      type: apiKey
+      in: header
+      name: X-Service-Key
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: OTP_EXPIRED
+            message:
+              type: string
+            field:
+              type: string
+          required:
+          - code
+          - message
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        refType:
+          type: string
+          enum:
+          - ORDER
+          - TOW
+        refId:
+          type: string
+          format: uuid
+        payerId:
+          type: string
+          format: uuid
+        amount:
+          type: integer
+        method:
+          type: string
+          enum:
+          - CASH
+          - SANDBOX
+        status:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - FAILED
+          - REFUNDED
+        createdAt:
+          type: string
+          format: date-time
+        paidAt:
+          type: string
+          format: date-time
+        payUrl:
+          type: string
+          description: 'v1.1, optional. Only for SANDBOX payments still PENDING: the sandbox page URL
+            (frontend route /pay/{token}). Omit it otherwise.'
+      required:
+      - id
+      - refType
+      - refId
+      - payerId
+      - amount
+      - method
+      - status
+      - createdAt

@@ -1,0 +1,40 @@
+# ---- Secrets and local config (commit .env.example, never .env) ----
+.env
+.env.*
+!.env.example
+*.local
+
+# ---- Node ----
+node_modules/
+dist/
+coverage/
+npm-debug.log*
+*.tsbuildinfo
+
+# ---- Python ----
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ---- Databases ----
+*.sqlite3
+*.db
+
+# ---- Generated reports ----
+contract-check-report.md
+
+# ---- Editors and OS ----
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# ---- Logs ----
+*.log
+
+# ---- Local only: old files kept for reference, not part of the project ----
+_archive/

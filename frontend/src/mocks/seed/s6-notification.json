@@ -1,0 +1,44 @@
+{
+  "templates": [
+    {
+      "type": "OTP_CODE",
+      "language": "en",
+      "title": "Your DriveFix code",
+      "body": "Your DriveFix code is {{code}}. Valid for 5 minutes."
+    },
+    {
+      "type": "OTP_CODE",
+      "language": "fr",
+      "title": "Votre code DriveFix",
+      "body": "Votre code DriveFix est {{code}}. Valable 5 minutes."
+    },
+    {
+      "type": "OTP_CODE",
+      "language": "ar",
+      "title": "رمز DriveFix",
+      "body": "رمز التحقق الخاص بك هو {{code}}. صالح لمدة 5 دقائق."
+    },
+    {
+      "type": "ORDER_CONFIRMED",
+      "language": "en",
+      "title": "Order confirmed",
+      "body": "Order {{orderId}} was confirmed by the supplier."
+    },
+    {
+      "type": "TOW_ASSIGNED",
+      "language": "en",
+      "title": "Tow driver assigned",
+      "body": "A tow driver is on the way. ETA {{eta}} min."
+    }
+  ],
+  "notifications": [
+    {
+      "id": "00000000-0000-4000-8000-000000000801",
+      "userId": "00000000-0000-4000-8000-000000000002",
+      "type": "ORDER_CONFIRMED",
+      "title": "Order confirmed",
+      "body": "Order 301 was confirmed by the supplier.",
+      "read": false
+    }
+  ]
+}

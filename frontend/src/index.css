@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens from Figma (Design System page). Stored as RGB triplets so Tailwind can apply opacity. */
+@layer base {
+  :root {
+    --ink: 15 27 45; /* #0F1B2D */
+    --navy-900: 14 27 51; /* #0E1B33 text/primary */
+    --navy-600: 85 98 122; /* #55627A text/secondary */
+    --night: 7 26 58; /* #071A3A */
+    --night-800: 11 42 91; /* #0B2A5B */
+    --brand: 31 78 158; /* #1F4E9E */
+    --blue-700: 11 42 91; /* #0B2A5B brand/primary */
+    --orange: 242 106 27; /* #F26A1B */
+    --orange-hover: 184 71 10; /* #B8470A: AA as small text on cream and with white text */
+    --orange-ink: 217 86 12; /* #D9560C: orange for large headings on light backgrounds (3:1+) */
+    --orange-soft: 255 178 127; /* #FFB27F */
+    --cream-50: 251 248 241; /* #FBF8F1 bg/page */
+    --cream-100: 244 239 227; /* #F4EFE3 */
+    --sand: 239 233 219; /* #EFE9DB bg/subtle */
+    --grey-200: 220 213 196; /* #DCD5C4 border/default */
+    --grey-400: 115 109 95; /* #736D5F (darkened from Figma #9A9484 to reach 4.5:1 for small text) */
+    --mist: 247 249 252; /* #F7F9FC */
+    --haze: 159 176 206; /* #9FB0CE secondary text on navy */
+    --success: 23 122 71;
+    --success-subtle: 230 244 236;
+    --danger: 192 57 43;
+    --danger-subtle: 253 236 236;
+    --warning: 150 87 10; /* #96570A */
+    --warning-subtle: 255 244 224;
+    --info: 31 78 158;
+    --info-subtle: 233 238 248;
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --page-gutter: 16px;
+
+    color-scheme: light;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --page-gutter: 32px;
+    }
+  }
+  @media (min-width: 1280px) {
+    :root {
+      --page-gutter: 64px;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html[dir='rtl'] body {
+    font-family: Cairo, 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  /* Arabic: no negative tracking (breaks letter joins), and the italic serif accent has no
+     Arabic glyphs, so the accent word uses Cairo semibold instead. */
+  html[dir='rtl'] body * {
+    letter-spacing: normal !important;
+  }
+  html[dir='rtl'] .font-serif {
+    font-family: Cairo, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+  }
+  html[dir='rtl'] .font-stat {
+    font-family: 'Space Grotesk', Cairo, sans-serif;
+  }
+
+  body {
+    @apply bg-cream-50 font-sans text-sm text-navy-900;
+    min-height: 100dvh;
+  }
+
+  /* One consistent, visible focus ring for keyboard users only */
+  :focus-visible {
+    outline: 2px solid rgb(var(--orange));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgb(var(--orange) / 0.25);
+  }
+
+  /* Numbers line up in tables, prices and timers */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* View Transitions: short cross-fade between routes */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: var(--ease-out);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: calc(1200px + var(--page-gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
+
+  /* Frosted glass on dark backgrounds (hero, nav, floating cards) */
+  .glass-dark {
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+  }
+
+  /* Glass pill used by the floating nav and the language toggle */
+  .glass-pill {
+    background: rgb(9 28 64 / 0.5);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  /* White glass panel on the cream page (app screens) */
+  .panel {
+    @apply rounded-panel border border-grey-200/90 bg-white/[0.78] shadow-panel;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .eyebrow {
+    @apply text-eyebrow font-semibold uppercase;
+  }
+
+  /* Pressable feedback (Emil): instant scale down, never on disabled */
+  .pressable {
+    transition: transform 160ms var(--ease-out);
+  }
+  .pressable:active:not(:disabled):not([aria-disabled='true']) {
+    transform: scale(0.97);
+  }
+}
+
+/* ---- Landing service cards: illustration motion (transform/opacity only) ---- */
+.svc-art svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.svc-art--disc svg > g,
+.svc-art--gauge #Needle,
+.svc-art--pin #Pin,
+.svc-art--pin [id='Pin dot'],
+.svc-art--pin #Shadow,
+.svc-art--pin [id='Ripple 1'],
+.svc-art--pin [id='Ripple 2'],
+.svc-line {
+  transform-box: view-box;
+  transition:
+    transform 700ms var(--ease-out),
+    opacity 400ms var(--ease-out);
+}
+.svc-art--disc svg > g,
+.svc-art--gauge #Needle {
+  transform-origin: 130px 130px;
+}
+.svc-art--pin #Shadow,
+.svc-art--pin [id='Ripple 1'],
+.svc-art--pin [id='Ripple 2'] {
+  transform-origin: 130px 214px;
+}
+.svc-line {
+  transform: scaleX(0);
+  transform-box: border-box;
+  transition: transform 500ms var(--ease-out);
+}
+
+@keyframes svc-ping {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* Hover on a real mouse, or keyboard focus. Never on touch (false hovers) and never with reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    .svc-card:hover .svc-line {
+      transform: scaleX(1);
+    }
+    /* Brake disc: a wheel turn that settles */
+    .svc-card:hover .svc-art--disc svg > g {
+      transform: rotate(150deg);
+      transition-duration: 1400ms;
+    }
+    /* Gauge: needle revs into the red zone with a small overshoot (easeOutBack) */
+    .svc-card:hover .svc-art--gauge #Needle {
+      transform: rotate(124deg);
+      transition: transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    /* Pin: lifts, its shadow tightens, the ground ripples */
+    .svc-card:hover .svc-art--pin #Pin,
+    .svc-card:hover .svc-art--pin [id='Pin dot'] {
+      transform: translateY(-14px);
+    }
+    .svc-card:hover .svc-art--pin #Shadow {
+      transform: scale(0.7);
+      opacity: 0.6;
+    }
+    .svc-card:hover .svc-art--pin [id='Ripple 2'] {
+      transform: scale(1.12);
+    }
+    .svc-card:hover .svc-art--pin [id='Ripple 1'] {
+      animation: svc-ping 1600ms var(--ease-out) infinite;
+    }
+  }
+  .svc-card:focus-visible .svc-line {
+    transform: scaleX(1);
+  }
+  .svc-card:focus-visible .svc-art--disc svg > g {
+    transform: rotate(150deg);
+    transition-duration: 1400ms;
+  }
+  .svc-card:focus-visible .svc-art--gauge #Needle {
+    transform: rotate(124deg);
+  }
+  .svc-card:focus-visible .svc-art--pin #Pin,
+  .svc-card:focus-visible .svc-art--pin [id='Pin dot'] {
+    transform: translateY(-14px);
+  }
+}
+
+@layer utilities {
+  .flip-rtl:where([dir='rtl'] *) {
+    transform: scaleX(-1);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Leaflet: keep map tiles below overlays */
+.leaflet-container {
+  font-family: inherit;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

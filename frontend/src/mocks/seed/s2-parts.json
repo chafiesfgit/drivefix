@@ -1,0 +1,241 @@
+{
+  "parts": [
+    {
+      "id": "00000000-0000-4000-8000-000000000101",
+      "name": "Front brake pads",
+      "brand": "Bosch",
+      "category": "Brakes",
+      "reference": "0 986 494 100",
+      "compatibleVehicles": [
+        "Golf 7",
+        "Polo 6R"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000102",
+      "name": "Oil filter",
+      "brand": "Mann",
+      "category": "Filters",
+      "reference": "W 712/95",
+      "compatibleVehicles": [
+        "Golf 7",
+        "Clio 4"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000103",
+      "name": "Air filter",
+      "brand": "Mahle",
+      "category": "Filters",
+      "reference": "LX 1006",
+      "compatibleVehicles": [
+        "Golf 7",
+        "Megane 3"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000104",
+      "name": "Spark plugs (set of 4)",
+      "brand": "NGK",
+      "category": "Ignition",
+      "reference": "BKR6E",
+      "compatibleVehicles": [
+        "Clio 4",
+        "Symbol"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000105",
+      "name": "Timing belt kit",
+      "brand": "Gates",
+      "category": "Engine",
+      "reference": "K015607XS",
+      "compatibleVehicles": [
+        "Golf 7",
+        "Octavia 3"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000106",
+      "name": "Car battery 70Ah",
+      "brand": "Varta",
+      "category": "Electrical",
+      "reference": "E11",
+      "compatibleVehicles": [
+        "Universal"
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "00000000-0000-4000-8000-000000000201",
+      "partId": "00000000-0000-4000-8000-000000000101",
+      "supplierId": "00000000-0000-4000-8000-000000000004",
+      "price": 4500,
+      "stock": 12,
+      "condition": "NEW",
+      "warrantyMonths": 12,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000202",
+      "partId": "00000000-0000-4000-8000-000000000101",
+      "supplierId": "00000000-0000-4000-8000-000000000005",
+      "price": 3900,
+      "stock": 5,
+      "condition": "NEW",
+      "warrantyMonths": 6,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000203",
+      "partId": "00000000-0000-4000-8000-000000000102",
+      "supplierId": "00000000-0000-4000-8000-000000000004",
+      "price": 1200,
+      "stock": 30,
+      "condition": "NEW",
+      "warrantyMonths": 6,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000204",
+      "partId": "00000000-0000-4000-8000-000000000103",
+      "supplierId": "00000000-0000-4000-8000-000000000005",
+      "price": 1500,
+      "stock": 20,
+      "condition": "NEW",
+      "warrantyMonths": 6,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000205",
+      "partId": "00000000-0000-4000-8000-000000000104",
+      "supplierId": "00000000-0000-4000-8000-000000000004",
+      "price": 2400,
+      "stock": 15,
+      "condition": "NEW",
+      "warrantyMonths": 12,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000206",
+      "partId": "00000000-0000-4000-8000-000000000105",
+      "supplierId": "00000000-0000-4000-8000-000000000005",
+      "price": 14500,
+      "stock": 4,
+      "condition": "NEW",
+      "warrantyMonths": 24,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000207",
+      "partId": "00000000-0000-4000-8000-000000000106",
+      "supplierId": "00000000-0000-4000-8000-000000000004",
+      "price": 16000,
+      "stock": 8,
+      "condition": "NEW",
+      "warrantyMonths": 24,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000208",
+      "partId": "00000000-0000-4000-8000-000000000106",
+      "supplierId": "00000000-0000-4000-8000-000000000005",
+      "price": 9000,
+      "stock": 2,
+      "condition": "USED",
+      "warrantyMonths": 3,
+      "deliveryWilayas": [
+        "16",
+        "09",
+        "35",
+        "31"
+      ],
+      "active": true
+    }
+  ],
+  "delivery_fees": [
+    {
+      "wilaya": "16",
+      "fee": 500
+    },
+    {
+      "wilaya": "09",
+      "fee": 600
+    },
+    {
+      "wilaya": "35",
+      "fee": 600
+    },
+    {
+      "wilaya": "31",
+      "fee": 900
+    },
+    {
+      "wilaya": "default",
+      "fee": 1200
+    }
+  ],
+  "orders": [
+    {
+      "id": "00000000-0000-4000-8000-000000000301",
+      "driverId": "00000000-0000-4000-8000-000000000002",
+      "status": "CONFIRMED",
+      "paymentMethod": "CASH",
+      "deliveryAddress": "Rue des Freres Bouchama, Rghaia",
+      "wilaya": "16",
+      "deliveryFee": 500,
+      "total": 5000,
+      "items": [
+        {
+          "offerId": "00000000-0000-4000-8000-000000000201",
+          "supplierId": "00000000-0000-4000-8000-000000000004",
+          "qty": 1,
+          "unitPrice": 4500
+        }
+      ]
+    }
+  ]
+}

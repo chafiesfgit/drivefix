@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="120" height="85" viewBox="0 0 120 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon">
+<path id="Speed 1" d="M7 42L48 37L47 40L11 45L7 42Z" fill="#F28C28" stroke-width="0.5" stroke="black"/>
+<path id="Speed 2" d="M2 50L35 47L34.5 49.5L5 52.5L2 50Z" fill="#F28C28" stroke-width="0.5" stroke="black"/>
+<path id="Speed 3" d="M11 57L31 55L30.5 57L13 59L11 57Z" fill="#F28C28" stroke-width="0.5" stroke="black"/>
+<path id="Roof" d="M26 50C40 31 59 22 80 26C88 27.5 95 31 103 36L93 35C78 31 60 32 47 45L26 50Z" fill="#0F1B2D" stroke-width="0.5" stroke="black"/>
+<path id="Body" d="M20 62C30 50 50 48 75 50L96 52C84 52 70 54 60 56C45 59 30 64 20 62Z" fill="#0F1B2D" stroke-width="0.5" stroke="black"/>
+<path id="Gear" d="M99.4277 12.2178L108.282 10.9658L109.827 19.7744L117.728 23.9658L113.8 32L117.728 40.0342L109.827 44.2256L108.282 53.0342L99.4277 51.7822L93 58L86.5723 51.7822L77.7178 53.0342L76.1729 44.2256L68.2725 40.0342L72.2002 32L68.2725 23.9658L76.1729 19.7744L77.7178 10.9658L86.5723 12.2178L93 6L99.4277 12.2178ZM93 17.5C84.9919 17.5 78.5 23.9919 78.5 32C78.5 40.0081 84.9919 46.5 93 46.5C101.008 46.5 107.5 40.0081 107.5 32C107.5 23.9919 101.008 17.5 93 17.5Z" fill="#0F1B2D"/>
+<path id="Wrench handle" d="M84.5 45L87.5 47L101 26L97.5 23.5L84.5 45Z" fill="#0F1B2D" stroke-width="0.5" stroke="black"/>
+<circle id="Wrench head" cx="100.5" cy="21.5" r="5.5" fill="#0F1B2D"/>
+</g>
+</svg>

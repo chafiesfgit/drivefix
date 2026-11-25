@@ -1,0 +1,40 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Art / Gauge">
+<circle id="Outer" cx="130" cy="130" r="118" stroke="white" stroke-opacity="0.22"/>
+<circle id="Inner" cx="130" cy="130" r="70" stroke="white" stroke-opacity="0.14"/>
+<path id="Tick" d="M43.4 180L57.25 172" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_2" d="M37.28 167.46L45.63 164.09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_3" d="M32.97 154.19L41.7 152.01" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_4" d="M30.55 140.45L39.5 139.51" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_5" d="M30.06 126.51L39.06 126.82" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_6" d="M31.52 112.64L47.28 115.41" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_7" d="M34.89 99.1L43.45 101.88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_8" d="M40.12 86.16L48.21 90.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_9" d="M47.1 74.08L54.56 79.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_10" d="M55.69 63.09L62.37 69.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_11" d="M65.72 53.4L76.01 65.65" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_12" d="M77.01 45.2L81.78 52.83" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_13" d="M89.33 38.65L92.99 46.87" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_14" d="M102.44 33.87L104.92 42.53" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_15" d="M116.08 30.97L117.34 39.89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_16" d="M130 30V46" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_17" d="M143.92 30.97L142.66 39.89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_18" d="M157.56 33.87L155.08 42.53" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_19" d="M170.67 38.65L167.01 46.87" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_20" d="M182.99 45.2L178.22 52.83" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_21" d="M194.28 53.4L183.99 65.65" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_22" d="M204.31 63.09L197.63 69.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_23" d="M212.9 74.08L205.44 79.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_24" d="M219.88 86.16L211.79 90.11" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_25" d="M225.11 99.1L216.55 101.88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Tick_26" d="M228.48 112.64L212.72 115.41" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Tick_27" d="M229.94 126.51L220.94 126.82" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Tick_28" d="M229.45 140.45L220.5 139.51" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Tick_29" d="M227.03 154.19L218.3 152.01" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Tick_30" d="M222.72 167.46L214.37 164.09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Tick_31" d="M216.6 180L202.75 172" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<path id="Needle" d="M130 130L92 64.18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="#F26A1B"/>
+<circle id="Pivot" cx="130" cy="130" r="11" fill="#F26A1B"/>
+<circle id="Pivot dot" cx="130" cy="130" r="4" fill="#0E1B33"/>
+</g>
+</svg>

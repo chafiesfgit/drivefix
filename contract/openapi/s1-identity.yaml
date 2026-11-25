@@ -1,0 +1,782 @@
+openapi: 3.0.3
+info:
+  title: DriveFix Identity
+  version: 1.1.0
+  description: 'Accounts, OTP, login, JWT (claims: sub, role, approved, exp), role applications, admin
+    approval.'
+servers:
+- url: http://localhost:4001/api/v1
+tags:
+- name: S1
+paths:
+  /auth/register:
+    post:
+      summary: Create account (status PENDING_OTP) and send OTP via S6
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                phone:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum:
+                  - DRIVER
+                  - SUPPLIER
+                  - MECHANIC
+                  - TOW_DRIVER
+                language:
+                  type: string
+                  enum:
+                  - ar
+                  - fr
+                  - en
+                businessName:
+                  type: string
+                wilaya:
+                  type: string
+                documentNumber:
+                  type: string
+                vehiclePlate:
+                  type: string
+              required:
+              - fullName
+              - phone
+              - password
+              - role
+              - language
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                  otpSentTo:
+                    type: string
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/verify-otp:
+    post:
+      summary: Verify the 6-digit code (5 min, 5 attempts)
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                code:
+                  type: string
+              required:
+              - phone
+              - code
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/resend-otp:
+    post:
+      summary: Resend OTP (60 s minimum gap)
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+              required:
+              - phone
+      responses:
+        '204':
+          description: No content
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/login:
+    post:
+      summary: Phone + password, returns JWT
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                password:
+                  type: string
+              required:
+              - phone
+              - password
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/refresh:
+    post:
+      summary: 'v1.1: fresh JWT with the current role, status and approved flag'
+      tags:
+      - S1
+      description: 'Roles: any authenticated user. Needs a valid, non-expired token. Used after an admin
+        approval so the user does not have to sign in again. Suspended accounts get 403 ACCOUNT_SUSPENDED.'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        '401':
+          description: UNAUTHORIZED (missing, invalid or expired token)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: ACCOUNT_SUSPENDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/forgot-password:
+    post:
+      summary: Send reset code by SMS (via S6)
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+              required:
+              - phone
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /auth/reset-password:
+    post:
+      summary: Code + new password
+      tags:
+      - S1
+      description: 'Roles: anyone (no token)'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                code:
+                  type: string
+                newPassword:
+                  type: string
+              required:
+              - phone
+              - code
+              - newPassword
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BUSINESS_RULE (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/me:
+    get:
+      summary: Own profile
+      tags:
+      - S1
+      description: 'Roles: any authenticated user'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: UNAUTHORIZED (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update name or language
+      tags:
+      - S1
+      description: 'Roles: any authenticated user'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                language:
+                  type: string
+                  enum:
+                  - ar
+                  - fr
+                  - en
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/{id}/public:
+    get:
+      summary: Name and phone for other services
+      tags:
+      - S1
+      description: 'Roles: service-to-service (X-Service-Key header)'
+      security:
+      - serviceKey: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  fullName:
+                    type: string
+                  phone:
+                    type: string
+                required:
+                - id
+                - fullName
+                - phone
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/applications:
+    get:
+      summary: Pending role applications
+      tags:
+      - S1
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Application'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/applications/{id}/approve:
+    post:
+      summary: Approve application
+      tags:
+      - S1
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/applications/{id}/reject:
+    post:
+      summary: Reject application, reason required
+      tags:
+      - S1
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+              required:
+              - reason
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: VALIDATION_ERROR (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: STATE_CONFLICT (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/users:
+    get:
+      summary: Search users
+      tags:
+      - S1
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: role
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  total:
+                    type: integer
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/users/{id}/status:
+    patch:
+      summary: Suspend or reactivate
+      tags:
+      - S1
+      description: 'Roles: ADMIN'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - ACTIVE
+                  - SUSPENDED
+                reason:
+                  type: string
+              required:
+              - status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '403':
+          description: FORBIDDEN (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND (stable error.code, see README)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceKey:
+      type: apiKey
+      in: header
+      name: X-Service-Key
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: OTP_EXPIRED
+            message:
+              type: string
+            field:
+              type: string
+          required:
+          - code
+          - message
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
+          enum:
+          - DRIVER
+          - SUPPLIER
+          - MECHANIC
+          - TOW_DRIVER
+          - DISPATCHER
+          - ADMIN
+        language:
+          type: string
+          enum:
+          - ar
+          - fr
+          - en
+        status:
+          type: string
+          enum:
+          - PENDING_OTP
+          - PENDING_APPROVAL
+          - ACTIVE
+          - SUSPENDED
+        approved:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - fullName
+      - phone
+      - role
+      - language
+      - status
+      - approved
+      - createdAt
+    AuthResult:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          type: object
+      required:
+      - token
+      - user
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        role:
+          type: string
+        businessName:
+          type: string
+        wilaya:
+          type: string
+        documentNumber:
+          type: string
+        vehiclePlate:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+        reason:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - userId
+      - role
+      - status
+      - createdAt

@@ -1,0 +1,86 @@
+{
+  "mechanic_profiles": [
+    {
+      "userId": "00000000-0000-4000-8000-000000000006",
+      "garageName": "Garage El Baraka",
+      "wilaya": "16",
+      "address": "Rghaia, Alger",
+      "lat": 36.7403,
+      "lng": 3.3425,
+      "specialties": [
+        "Brakes",
+        "Engine"
+      ],
+      "offersMobile": true,
+      "workingHours": {
+        "sun-thu": "08:00-17:00"
+      },
+      "rating": 4.6
+    },
+    {
+      "userId": "00000000-0000-4000-8000-000000000007",
+      "garageName": "Garage Ennour",
+      "wilaya": "35",
+      "address": "Boumerdes centre",
+      "lat": 36.766,
+      "lng": 3.4772,
+      "specialties": [
+        "Electrical",
+        "AC"
+      ],
+      "offersMobile": false,
+      "workingHours": {
+        "sat-thu": "08:30-16:30"
+      },
+      "rating": 4.2
+    }
+  ],
+  "services": [
+    {
+      "id": "00000000-0000-4000-8000-000000000401",
+      "mechanicId": "00000000-0000-4000-8000-000000000006",
+      "name": "Brake pad replacement",
+      "price": 2500,
+      "durationMin": 60,
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000402",
+      "mechanicId": "00000000-0000-4000-8000-000000000006",
+      "name": "Oil change",
+      "price": 1800,
+      "durationMin": 30,
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000403",
+      "mechanicId": "00000000-0000-4000-8000-000000000007",
+      "name": "Battery check and replacement",
+      "price": 1500,
+      "durationMin": 30,
+      "active": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000404",
+      "mechanicId": "00000000-0000-4000-8000-000000000007",
+      "name": "AC recharge",
+      "price": 4000,
+      "durationMin": 60,
+      "active": true
+    }
+  ],
+  "bookings": [
+    {
+      "id": "00000000-0000-4000-8000-000000000501",
+      "driverId": "00000000-0000-4000-8000-000000000002",
+      "mechanicId": "00000000-0000-4000-8000-000000000006",
+      "serviceId": "00000000-0000-4000-8000-000000000401",
+      "price": 2500,
+      "date": "2026-11-26",
+      "startTime": "10:00",
+      "place": "GARAGE",
+      "vehicle": "Golf 7 2016",
+      "status": "CONFIRMED"
+    }
+  ]
+}

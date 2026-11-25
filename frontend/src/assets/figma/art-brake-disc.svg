@@ -1,0 +1,25 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Art / Brake disc">
+<circle id="Disc" cx="130" cy="130" r="118" fill="white" fill-opacity="0.07" stroke-width="1.5" stroke="white" stroke-opacity="0.55"/>
+<circle id="Rim" cx="130" cy="130" r="106" stroke="white" stroke-opacity="0.22"/>
+<ellipse id="Vent" cx="130" cy="48" rx="7" ry="17" fill="white" fill-opacity="0.1" stroke-width="1.2" stroke="white" stroke-opacity="0.5"/>
+<ellipse id="Vent_2" cx="171" cy="58.9859" rx="7" ry="17" transform="rotate(30 171 58.9859)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_3" cx="201.014" cy="89" rx="7" ry="17" transform="rotate(60 201.014 89)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_4" cx="212" cy="130" rx="17" ry="7" fill="white" fill-opacity="0.1" stroke-width="1.2" stroke="white" stroke-opacity="0.5"/>
+<ellipse id="Vent_5" cx="201.014" cy="171" rx="7" ry="17" transform="rotate(120 201.014 171)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_6" cx="171" cy="201.014" rx="7" ry="17" transform="rotate(150 171 201.014)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_7" cx="130" cy="212" rx="7" ry="17" fill="white" fill-opacity="0.1" stroke-width="1.2" stroke="white" stroke-opacity="0.5"/>
+<ellipse id="Vent_8" cx="89" cy="201.014" rx="7" ry="17" transform="rotate(-150 89 201.014)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_9" cx="58.9859" cy="171" rx="7" ry="17" transform="rotate(-120 58.9859 171)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_10" cx="48" cy="130" rx="17" ry="7" fill="white" fill-opacity="0.1" stroke-width="1.2" stroke="white" stroke-opacity="0.5"/>
+<ellipse id="Vent_11" cx="58.9859" cy="89" rx="7" ry="17" transform="rotate(-60 58.9859 89)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse id="Vent_12" cx="89" cy="58.9859" rx="7" ry="17" transform="rotate(-30 89 58.9859)" fill="white" fill-opacity="0.1" stroke="white" stroke-opacity="0.5" stroke-width="1.2"/>
+<circle id="Hub" cx="130" cy="130" r="44" fill="white" fill-opacity="0.12" stroke-width="1.5" stroke="white" stroke-opacity="0.65"/>
+<circle id="Axle" cx="130" cy="130" r="14" stroke-width="1.5" stroke="white" stroke-opacity="0.7"/>
+<circle id="Bolt" cx="130" cy="101" r="4.5" stroke-width="1.2" stroke="white" stroke-opacity="0.7"/>
+<circle id="Bolt_2" cx="157.581" cy="121.039" r="4.5" stroke-width="1.2" stroke="white" stroke-opacity="0.7"/>
+<circle id="Bolt_3" cx="147.046" cy="153.461" r="4.5" stroke-width="1.2" stroke="white" stroke-opacity="0.7"/>
+<circle id="Bolt_4" cx="112.954" cy="153.461" r="4.5" stroke-width="1.2" stroke="white" stroke-opacity="0.7"/>
+<circle id="Bolt_5" cx="102.419" cy="121.039" r="4.5" stroke-width="1.2" stroke="white" stroke-opacity="0.7"/>
+</g>
+</svg>

@@ -1,0 +1,21 @@
+# Normalise line endings: LF in the repository, native on checkout
+* text=auto
+
+# PowerShell scripts keep Windows line endings
+*.ps1 text eol=crlf
+
+# Binary files
+*.docx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+
+# Generated files: collapsed in GitHub diffs
+frontend/src/api/types/** linguist-generated=true
+frontend/public/mockServiceWorker.js linguist-generated=true
+**/package-lock.json linguist-generated=true

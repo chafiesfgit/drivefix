@@ -1,0 +1,18 @@
+{
+  "name": "drivefix-contract-check",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Checks that a DriveFix service (S1..S6) matches the shared API contract.",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "bin": { "contract-check": "bin/contract-check.mjs" },
+  "scripts": {
+    "check": "node bin/contract-check.mjs",
+    "sync-contract": "node scripts/sync-contract.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "yaml": "2.8.1"
+  }
+}

@@ -1,0 +1,5 @@
+export { LoginPage } from './LoginPage'
+export { RegisterPage } from './RegisterPage'
+export { VerifyOtpPage } from './VerifyOtpPage'
+export { ForgotPasswordPage, ResetPasswordPage } from './PasswordPages'
+export { PendingApprovalPage, AccountStatePage } from './StatusPages'

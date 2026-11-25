@@ -1,0 +1,115 @@
+{
+  "password_for_all": "Password123",
+  "users": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "fullName": "Admin DriveFix",
+      "phone": "0555000001",
+      "role": "ADMIN",
+      "language": "en",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "fullName": "Karim Benali",
+      "phone": "0555000002",
+      "role": "DRIVER",
+      "language": "fr",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "fullName": "Sara Amrani",
+      "phone": "0555000003",
+      "role": "DRIVER",
+      "language": "ar",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "fullName": "Auto Pieces Bab Ezzouar",
+      "phone": "0555000004",
+      "role": "SUPPLIER",
+      "language": "fr",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000005",
+      "fullName": "Pieces Auto Oran",
+      "phone": "0555000005",
+      "role": "SUPPLIER",
+      "language": "fr",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000006",
+      "fullName": "Garage El Baraka",
+      "phone": "0555000006",
+      "role": "MECHANIC",
+      "language": "ar",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000007",
+      "fullName": "Garage Ennour",
+      "phone": "0555000007",
+      "role": "MECHANIC",
+      "language": "fr",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000008",
+      "fullName": "Remorquage Yacine",
+      "phone": "0555000008",
+      "role": "TOW_DRIVER",
+      "language": "ar",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000009",
+      "fullName": "Remorquage Amine",
+      "phone": "0555000009",
+      "role": "TOW_DRIVER",
+      "language": "fr",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "fullName": "Dispatcher One",
+      "phone": "0555000010",
+      "role": "DISPATCHER",
+      "language": "en",
+      "status": "ACTIVE",
+      "approved": true
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000011",
+      "fullName": "Nouveau Fournisseur",
+      "phone": "0555000011",
+      "role": "SUPPLIER",
+      "language": "fr",
+      "status": "PENDING_APPROVAL",
+      "approved": false
+    }
+  ],
+  "applications": [
+    {
+      "id": "00000000-0000-4000-8000-000000000900",
+      "userId": "00000000-0000-4000-8000-000000000011",
+      "role": "SUPPLIER",
+      "businessName": "Nouveau Fournisseur",
+      "wilaya": "16 - Alger",
+      "documentNumber": "RC-16-123456",
+      "status": "PENDING"
+    }
+  ]
+}

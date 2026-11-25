@@ -1,0 +1,266 @@
+{
+  "en": {
+    "map": { "label": "Map" },
+    "parts": {
+      "title": "Spare", "accent": "parts", "guestSubtitle": "Browse without an account · sign in to order",
+      "findTitle": "Find your part", "category": "Category", "new": "New · original", "used": "Used", "usedAvailable": "Used available",
+      "from": "from", "seeOffers": "See offers", "offersCount_one": "{{count}} offer", "offersCount_other": "{{count}} offers",
+      "resultsCount_one": "{{count}} part found", "resultsCount_other": "{{count}} parts found",
+      "noResults": "No part matches", "noResultsBody": "Try a shorter name, the reference, or remove the vehicle filter.", "clearFilters": "Clear filters",
+      "cat": { "Brakes": "Brakes", "Filters": "Filters", "Ignition": "Ignition", "Engine": "Engine", "Electrical": "Electrical", "Suspension": "Suspension" },
+      "backToResults": "Back to results", "brand": "Brand", "reference": "Reference", "compatible": "Fits", "offersTitle_one": "{{count}} offer, cheapest first", "offersTitle_other": "{{count}} offers, cheapest first",
+      "compare": "Compare ({{count}})", "compareHint": "Tick up to 3 offers to compare them side by side.", "compareTitle": "Compare offers",
+      "selectForCompare": "Compare offer from {{name}}", "supplier": "Supplier", "bestPrice": "Best price",
+      "warranty_one": "{{count}} month warranty", "warranty_other": "{{count}} months warranty", "warrantyLabel": "Warranty",
+      "inStock_one": "{{count}} in stock", "inStock_other": "{{count}} in stock", "outOfStock": "Out of stock", "deliversTo": "Delivers to",
+      "addToCart": "Add to cart", "addOneMore": "Add one more", "added": "Added to cart", "signInToOrder": "Sign in as a driver to order.",
+      "noOffers": "No offer right now", "noOffersBody": "Suppliers have not listed this part yet. Check again soon.",
+      "condition": "Condition", "rating": "Supplier rating", "stock": "Stock"
+    },
+    "mechanics": {
+      "title": "Trusted", "accent": "mechanics", "subtitle": "Verified workshops near you · book a slot, pay after the service",
+      "filters": "Filter workshops", "specialty": "Specialty", "atYourPlace": "Comes to your place", "atGarage": "At the workshop",
+      "empty": "No workshop matches", "emptyBody": "Try another wilaya or remove a filter.", "mapLabel": "Map of workshops",
+      "noRating": "New", "ratingLabel": "Rated {{value}} out of 5", "verifiedBadge": "Verified: phone + ID",
+      "spec": { "Brakes": "Brakes", "Engine": "Engine", "Electrical": "Electrical", "AC": "Air conditioning", "Suspension": "Suspension", "Bodywork": "Bodywork" },
+      "back": "Back to mechanics", "address": "Address", "hours": "Opening hours", "services": "Services and prices", "noServices": "No service listed yet",
+      "reviews": "Reviews", "noReviews": "No review yet", "duration_one": "{{count}} min", "duration_other": "{{count}} min",
+      "bookTitle": "Book a slot", "signInToBook": "Sign in as a driver to book this workshop.", "service": "Service", "day": "Day", "time": "Time",
+      "closed": "closed", "noSlots": "No free slot this day. Try another day.", "where": "Where", "yourAddress": "Your address",
+      "atClientHelp": "The mechanic confirms home visits.", "vehicle": "Vehicle", "note": "Note for the mechanic", "when": "When",
+      "payAfter": "You pay at the workshop after the service.", "confirmBooking": "Confirm booking",
+      "bookedTitle": "Booking sent", "bookedBody": "The mechanic will confirm it. You will get a notification.", "seeBookings": "See my bookings"
+    },
+    "sos": {
+      "title": "SOS", "accent": "towing", "guestSubtitle": "No account needed · share your position, we find the nearest truck",
+      "whereTitle": "Where are you?", "whereHelp": "Use your location or tap the map to place the pickup point.",
+      "useMyLocation": "Use my location", "pickOnMap": "Pick on the map", "geoUnsupported": "Location is not available on this device.",
+      "geoDenied": "We could not get your location. Tap the map to place the pickup point.", "mapLabel": "Pickup map",
+      "detailsTitle": "Request details", "urgency": "Urgency", "urgent": "Urgent", "normal": "Not urgent",
+      "address": "Pickup address", "addressPh": "Road, landmark, km marker", "destination": "Tow to (garage, home)",
+      "issue": "Problem", "moreDetails": "More details", "yourPhone": "Your phone number", "phoneHelp": "The driver will call you on this number.",
+      "issues": { "noStart": "Engine will not start", "flat": "Flat tyre", "accident": "Accident", "overheat": "Overheating", "battery": "Battery dead", "other": "Other" },
+      "estimate": "Estimate from {{price}}", "estimateHelp": "Base fee plus distance. The final price is confirmed by the driver. Cash to the driver.",
+      "send": "Send SOS request", "needPosition": "Set your position on the map first.", "hotline": "Emergency hotline",
+      "trackTitle": "Live", "trackAccent": "tracking", "trackSubtitle": "Updates every 5 seconds",
+      "eta": "Arrives in", "refreshNote": "Position refreshes every 5 seconds.", "progress": "Progress",
+      "status": { "SEARCHING": "Looking for a truck", "ASSIGNED": "Truck assigned", "EN_ROUTE": "On the way", "ARRIVED": "Truck arrived", "COMPLETED": "Completed", "CANCELLED": "Cancelled", "NO_DRIVER": "No driver available yet" },
+      "noDriverTitle": "No truck accepted yet", "noDriverBody": "A dispatcher is assigning a truck manually. You can also call the hotline.",
+      "cancelledBody": "This request was cancelled.", "yourDriver": "Your tow driver", "callDriver": "Call",
+      "requestTitle": "Your request", "trackingCode": "Tracking code", "estimatedPrice": "Estimated price", "payment": "Payment", "cashToDriver": "Cash to the driver",
+      "cancel": "Cancel request", "cancelTitle": "Cancel this tow request?", "cancelBody": "The truck will be released. You can send a new request at any time.",
+      "request": "Request a tow", "requestSubtitle": "We send your request to the nearest available truck"
+    },
+    "how": {
+      "title": "How it", "accent": "works", "subtitle": "Three services, one account, cash on delivery",
+      "parts1": "Pick your vehicle and search by name or reference.", "parts2": "Compare offers: price, new or used, warranty.", "parts3": "Order and pay cash when the parts arrive.",
+      "mech1": "Find a verified workshop near you.", "mech2": "Choose a service and a free slot.", "mech3": "Pay at the workshop after the repair, then rate it.",
+      "sos1": "Share your position, no account needed.", "sos2": "The nearest truck gets 30 seconds to accept.", "sos3": "Follow the truck live and pay the driver."
+    },
+    "help": {
+      "title": "Help and", "accent": "contact", "subtitle": "We answer in Arabic, French and English",
+      "call": "Call us", "callBody": "Emergency towing and urgent questions, every day.", "email": "Write to us", "emailBody": "Orders, accounts and partnerships. Answer within one working day.",
+      "faq": "Quick answers", "faqBody": "Payment, VIN, used parts and towing times."
+    },
+    "legal": {
+      "updated": "Last updated: November 2026 · university project",
+      "terms": { "title": "Terms of", "accent": "service", "sections": [
+        { "h": "1. The service", "p": "DriveFix connects drivers with parts suppliers, mechanics and tow drivers in Algeria. DriveFix is not the seller of the parts nor the provider of the repair or towing service." },
+        { "h": "2. Accounts", "p": "Your Algerian mobile number is your login. Suppliers, mechanics and tow drivers are checked by an administrator before they can receive requests." },
+        { "h": "3. Prices and payment", "p": "Prices are set by each partner and shown before you confirm. Payment is cash on delivery by default. The online payment page is a demo: no real money moves." },
+        { "h": "4. Used parts", "p": "Used parts must always be labelled as used, with their condition and warranty." },
+        { "h": "5. Reviews", "p": "You can leave one review per delivered order or finished booking. Abusive reviews are removed by moderation." }
+      ] },
+      "privacy": { "title": "Privacy and", "accent": "consent", "sections": [
+        { "h": "Data we keep", "p": "Your name, phone number, language, and the orders, bookings and tow requests you make. Passwords are stored hashed and never shown." },
+        { "h": "Your position", "p": "Your location is used only during an SOS request, to find the nearest truck and show the live tracking." },
+        { "h": "Who sees what", "p": "A partner sees only what is needed to serve you: your name and phone number for the order, booking or tow." },
+        { "h": "Your rights", "p": "You can ask to see, correct or delete your data by contacting support." }
+      ] }
+    },
+    "payments": {
+      "title": "Sandbox", "accent": "payment", "subtitle": "Demo — no real money", "amount": "Amount", "label": "For", "expires": "Link expires",
+      "demoBanner": "Demo — no real money. This page simulates a payment provider.", "succeed": "Simulate success", "fail": "Simulate failure",
+      "paid": "Payment received", "paidBody": "Your order is now paid. The supplier will confirm it.", "failed": "Payment failed", "failedBody": "No money was taken. You can try again from your order or pay cash.",
+      "backToOrders": "Back to my orders", "alreadySettled": "This payment is already settled.",
+      "status": { "PENDING": "Pending", "PAID": "Paid", "FAILED": "Failed", "REFUNDED": "Refunded" },
+      "method": { "CASH": "Cash on delivery", "SANDBOX": "Online (demo)" }
+    }
+  },
+  "fr": {
+    "map": { "label": "Carte" },
+    "parts": {
+      "title": "Pièces", "accent": "détachées", "guestSubtitle": "Consultez sans compte · connectez-vous pour commander",
+      "findTitle": "Trouvez votre pièce", "category": "Catégorie", "new": "Neuf · origine", "used": "Occasion", "usedAvailable": "Occasion dispo",
+      "from": "dès", "seeOffers": "Voir les offres", "offersCount_one": "{{count}} offre", "offersCount_other": "{{count}} offres",
+      "resultsCount_one": "{{count}} pièce trouvée", "resultsCount_other": "{{count}} pièces trouvées",
+      "noResults": "Aucune pièce ne correspond", "noResultsBody": "Essayez un nom plus court, la référence, ou retirez le filtre véhicule.", "clearFilters": "Effacer les filtres",
+      "cat": { "Brakes": "Freinage", "Filters": "Filtres", "Ignition": "Allumage", "Engine": "Moteur", "Electrical": "Électricité", "Suspension": "Suspension" },
+      "backToResults": "Retour aux résultats", "brand": "Marque", "reference": "Référence", "compatible": "Compatible", "offersTitle_one": "{{count}} offre, la moins chère d'abord", "offersTitle_other": "{{count}} offres, la moins chère d'abord",
+      "compare": "Comparer ({{count}})", "compareHint": "Cochez jusqu'à 3 offres pour les comparer.", "compareTitle": "Comparer les offres",
+      "selectForCompare": "Comparer l'offre de {{name}}", "supplier": "Fournisseur", "bestPrice": "Meilleur prix",
+      "warranty_one": "Garantie {{count}} mois", "warranty_other": "Garantie {{count}} mois", "warrantyLabel": "Garantie",
+      "inStock_one": "{{count}} en stock", "inStock_other": "{{count}} en stock", "outOfStock": "Rupture", "deliversTo": "Livre à",
+      "addToCart": "Ajouter au panier", "addOneMore": "Ajouter encore", "added": "Ajouté au panier", "signInToOrder": "Connectez-vous en tant que conducteur pour commander.",
+      "noOffers": "Aucune offre pour le moment", "noOffersBody": "Aucun fournisseur ne propose encore cette pièce.",
+      "condition": "État", "rating": "Note du fournisseur", "stock": "Stock"
+    },
+    "mechanics": {
+      "title": "Mécaniciens de", "accent": "confiance", "subtitle": "Ateliers vérifiés près de chez vous · réservez, payez après le service",
+      "filters": "Filtrer les ateliers", "specialty": "Spécialité", "atYourPlace": "Se déplace chez vous", "atGarage": "À l'atelier",
+      "empty": "Aucun atelier ne correspond", "emptyBody": "Essayez une autre wilaya ou retirez un filtre.", "mapLabel": "Carte des ateliers",
+      "noRating": "Nouveau", "ratingLabel": "Noté {{value}} sur 5", "verifiedBadge": "Vérifié : téléphone + identité",
+      "spec": { "Brakes": "Freinage", "Engine": "Moteur", "Electrical": "Électricité", "AC": "Climatisation", "Suspension": "Suspension", "Bodywork": "Carrosserie" },
+      "back": "Retour aux mécaniciens", "address": "Adresse", "hours": "Horaires", "services": "Services et tarifs", "noServices": "Aucun service pour le moment",
+      "reviews": "Avis", "noReviews": "Aucun avis", "duration_one": "{{count}} min", "duration_other": "{{count}} min",
+      "bookTitle": "Réserver un créneau", "signInToBook": "Connectez-vous en tant que conducteur pour réserver.", "service": "Service", "day": "Jour", "time": "Heure",
+      "closed": "fermé", "noSlots": "Aucun créneau libre ce jour. Essayez un autre jour.", "where": "Où", "yourAddress": "Votre adresse",
+      "atClientHelp": "Le mécanicien confirme les déplacements.", "vehicle": "Véhicule", "note": "Note pour le mécanicien", "when": "Quand",
+      "payAfter": "Vous payez à l'atelier après le service.", "confirmBooking": "Confirmer la réservation",
+      "bookedTitle": "Réservation envoyée", "bookedBody": "Le mécanicien va la confirmer. Vous recevrez une notification.", "seeBookings": "Voir mes réservations"
+    },
+    "sos": {
+      "title": "Dépannage", "accent": "SOS", "guestSubtitle": "Sans compte · partagez votre position, nous trouvons la dépanneuse la plus proche",
+      "whereTitle": "Où êtes-vous ?", "whereHelp": "Utilisez votre position ou touchez la carte pour placer le point de prise en charge.",
+      "useMyLocation": "Ma position", "pickOnMap": "Choisir sur la carte", "geoUnsupported": "La localisation n'est pas disponible sur cet appareil.",
+      "geoDenied": "Position introuvable. Touchez la carte pour placer le point.", "mapLabel": "Carte de prise en charge",
+      "detailsTitle": "Détails de la demande", "urgency": "Urgence", "urgent": "Urgent", "normal": "Pas urgent",
+      "address": "Adresse de prise en charge", "addressPh": "Route, repère, borne kilométrique", "destination": "Remorquer vers (garage, domicile)",
+      "issue": "Problème", "moreDetails": "Plus de détails", "yourPhone": "Votre numéro", "phoneHelp": "Le dépanneur vous appellera sur ce numéro.",
+      "issues": { "noStart": "Le moteur ne démarre pas", "flat": "Crevaison", "accident": "Accident", "overheat": "Surchauffe", "battery": "Batterie à plat", "other": "Autre" },
+      "estimate": "Estimation dès {{price}}", "estimateHelp": "Forfait plus distance. Le prix final est confirmé par le dépanneur. Paiement en espèces.",
+      "send": "Envoyer la demande SOS", "needPosition": "Placez d'abord votre position sur la carte.", "hotline": "Numéro d'urgence",
+      "trackTitle": "Suivi en", "trackAccent": "direct", "trackSubtitle": "Mise à jour toutes les 5 secondes",
+      "eta": "Arrivée dans", "refreshNote": "La position se met à jour toutes les 5 secondes.", "progress": "Avancement",
+      "status": { "SEARCHING": "Recherche d'une dépanneuse", "ASSIGNED": "Dépanneuse assignée", "EN_ROUTE": "En route", "ARRIVED": "Dépanneuse arrivée", "COMPLETED": "Terminé", "CANCELLED": "Annulé", "NO_DRIVER": "Aucun dépanneur disponible" },
+      "noDriverTitle": "Aucune dépanneuse n'a accepté", "noDriverBody": "Un régulateur assigne une dépanneuse manuellement. Vous pouvez aussi appeler le numéro d'urgence.",
+      "cancelledBody": "Cette demande a été annulée.", "yourDriver": "Votre dépanneur", "callDriver": "Appeler",
+      "requestTitle": "Votre demande", "trackingCode": "Code de suivi", "estimatedPrice": "Prix estimé", "payment": "Paiement", "cashToDriver": "Espèces au dépanneur",
+      "cancel": "Annuler la demande", "cancelTitle": "Annuler cette demande ?", "cancelBody": "La dépanneuse sera libérée. Vous pouvez refaire une demande à tout moment.",
+      "request": "Demander un dépannage", "requestSubtitle": "Votre demande part vers la dépanneuse disponible la plus proche"
+    },
+    "how": {
+      "title": "Comment ça", "accent": "marche", "subtitle": "Trois services, un compte, paiement à la livraison",
+      "parts1": "Choisissez votre véhicule, cherchez par nom ou référence.", "parts2": "Comparez les offres : prix, neuf ou occasion, garantie.", "parts3": "Commandez et payez en espèces à la livraison.",
+      "mech1": "Trouvez un atelier vérifié près de chez vous.", "mech2": "Choisissez un service et un créneau libre.", "mech3": "Payez à l'atelier après la réparation, puis notez-le.",
+      "sos1": "Partagez votre position, sans compte.", "sos2": "La dépanneuse la plus proche a 30 secondes pour accepter.", "sos3": "Suivez la dépanneuse en direct et payez le dépanneur."
+    },
+    "help": {
+      "title": "Aide et", "accent": "contact", "subtitle": "Nous répondons en arabe, français et anglais",
+      "call": "Appelez-nous", "callBody": "Dépannage urgent et questions urgentes, tous les jours.", "email": "Écrivez-nous", "emailBody": "Commandes, comptes et partenariats. Réponse sous un jour ouvré.",
+      "faq": "Réponses rapides", "faqBody": "Paiement, VIN, pièces d'occasion et délais de dépannage."
+    },
+    "legal": {
+      "updated": "Dernière mise à jour : novembre 2026 · projet universitaire",
+      "terms": { "title": "Conditions", "accent": "d'utilisation", "sections": [
+        { "h": "1. Le service", "p": "DriveFix met en relation les conducteurs avec des fournisseurs de pièces, des mécaniciens et des dépanneurs en Algérie. DriveFix n'est ni le vendeur des pièces ni le prestataire des réparations ou du dépannage." },
+        { "h": "2. Comptes", "p": "Votre numéro mobile algérien est votre identifiant. Les fournisseurs, mécaniciens et dépanneurs sont vérifiés par un administrateur avant de recevoir des demandes." },
+        { "h": "3. Prix et paiement", "p": "Les prix sont fixés par chaque partenaire et affichés avant confirmation. Le paiement se fait à la livraison par défaut. La page de paiement en ligne est une démo : aucun argent réel." },
+        { "h": "4. Pièces d'occasion", "p": "Les pièces d'occasion doivent toujours être signalées, avec leur état et leur garantie." },
+        { "h": "5. Avis", "p": "Un avis par commande livrée ou réservation terminée. Les avis abusifs sont retirés par la modération." }
+      ] },
+      "privacy": { "title": "Confidentialité et", "accent": "consentement", "sections": [
+        { "h": "Données conservées", "p": "Votre nom, numéro, langue, ainsi que vos commandes, réservations et demandes de dépannage. Les mots de passe sont hachés et jamais affichés." },
+        { "h": "Votre position", "p": "Votre position sert uniquement pendant une demande SOS, pour trouver la dépanneuse la plus proche et afficher le suivi." },
+        { "h": "Qui voit quoi", "p": "Un partenaire ne voit que ce qui est nécessaire : votre nom et votre numéro pour la commande, la réservation ou le dépannage." },
+        { "h": "Vos droits", "p": "Vous pouvez demander l'accès, la correction ou la suppression de vos données en contactant le support." }
+      ] }
+    },
+    "payments": {
+      "title": "Paiement", "accent": "sandbox", "subtitle": "Démo — aucun argent réel", "amount": "Montant", "label": "Objet", "expires": "Le lien expire",
+      "demoBanner": "Démo — aucun argent réel. Cette page simule un prestataire de paiement.", "succeed": "Simuler un succès", "fail": "Simuler un échec",
+      "paid": "Paiement reçu", "paidBody": "Votre commande est payée. Le fournisseur va la confirmer.", "failed": "Paiement échoué", "failedBody": "Aucun montant prélevé. Réessayez depuis votre commande ou payez en espèces.",
+      "backToOrders": "Retour à mes commandes", "alreadySettled": "Ce paiement est déjà réglé.",
+      "status": { "PENDING": "En attente", "PAID": "Payé", "FAILED": "Échoué", "REFUNDED": "Remboursé" },
+      "method": { "CASH": "Paiement à la livraison", "SANDBOX": "En ligne (démo)" }
+    }
+  },
+  "ar": {
+    "map": { "label": "الخريطة" },
+    "parts": {
+      "title": "قطع", "accent": "الغيار", "guestSubtitle": "تصفح بدون حساب · سجّل الدخول للطلب",
+      "findTitle": "ابحث عن قطعتك", "category": "الفئة", "new": "جديد · أصلي", "used": "مستعمل", "usedAvailable": "يتوفر مستعمل",
+      "from": "ابتداءً من", "seeOffers": "عرض العروض", "offersCount_one": "عرض واحد", "offersCount_other": "{{count}} عروض",
+      "resultsCount_one": "تم العثور على قطعة واحدة", "resultsCount_other": "تم العثور على {{count}} قطع",
+      "noResults": "لا توجد قطعة مطابقة", "noResultsBody": "جرّب اسمًا أقصر أو المرجع، أو أزل فلتر المركبة.", "clearFilters": "مسح الفلاتر",
+      "cat": { "Brakes": "الفرامل", "Filters": "الفلاتر", "Ignition": "الإشعال", "Engine": "المحرك", "Electrical": "الكهرباء", "Suspension": "التعليق" },
+      "backToResults": "العودة إلى النتائج", "brand": "الماركة", "reference": "المرجع", "compatible": "متوافقة مع", "offersTitle_one": "عرض واحد", "offersTitle_other": "{{count}} عروض، الأرخص أولًا",
+      "compare": "مقارنة ({{count}})", "compareHint": "اختر حتى 3 عروض لمقارنتها جنبًا إلى جنب.", "compareTitle": "مقارنة العروض",
+      "selectForCompare": "مقارنة عرض {{name}}", "supplier": "المورّد", "bestPrice": "أفضل سعر",
+      "warranty_one": "ضمان {{count}} شهر", "warranty_other": "ضمان {{count}} أشهر", "warrantyLabel": "الضمان",
+      "inStock_one": "{{count}} في المخزون", "inStock_other": "{{count}} في المخزون", "outOfStock": "نفد المخزون", "deliversTo": "يوصل إلى",
+      "addToCart": "أضف إلى السلة", "addOneMore": "أضف واحدة أخرى", "added": "تمت الإضافة إلى السلة", "signInToOrder": "سجّل الدخول كسائق للطلب.",
+      "noOffers": "لا توجد عروض حاليًا", "noOffersBody": "لم يعرض أي مورّد هذه القطعة بعد.",
+      "condition": "الحالة", "rating": "تقييم المورّد", "stock": "المخزون"
+    },
+    "mechanics": {
+      "title": "ميكانيكيون", "accent": "موثوقون", "subtitle": "ورشات موثّقة قريبة منك · احجز موعدًا وادفع بعد الخدمة",
+      "filters": "تصفية الورشات", "specialty": "التخصص", "atYourPlace": "يأتي إلى مكانك", "atGarage": "في الورشة",
+      "empty": "لا توجد ورشة مطابقة", "emptyBody": "جرّب ولاية أخرى أو أزل فلترًا.", "mapLabel": "خريطة الورشات",
+      "noRating": "جديد", "ratingLabel": "التقييم {{value}} من 5", "verifiedBadge": "موثّق: الهاتف + الهوية",
+      "spec": { "Brakes": "الفرامل", "Engine": "المحرك", "Electrical": "الكهرباء", "AC": "التكييف", "Suspension": "التعليق", "Bodywork": "هيكل السيارة" },
+      "back": "العودة إلى الميكانيكيين", "address": "العنوان", "hours": "أوقات العمل", "services": "الخدمات والأسعار", "noServices": "لا توجد خدمات بعد",
+      "reviews": "التقييمات", "noReviews": "لا توجد تقييمات", "duration_one": "{{count}} د", "duration_other": "{{count}} د",
+      "bookTitle": "احجز موعدًا", "signInToBook": "سجّل الدخول كسائق لحجز هذه الورشة.", "service": "الخدمة", "day": "اليوم", "time": "الساعة",
+      "closed": "مغلق", "noSlots": "لا توجد مواعيد متاحة في هذا اليوم. جرّب يومًا آخر.", "where": "المكان", "yourAddress": "عنوانك",
+      "atClientHelp": "يؤكد الميكانيكي الزيارات المنزلية.", "vehicle": "المركبة", "note": "ملاحظة للميكانيكي", "when": "الموعد",
+      "payAfter": "تدفع في الورشة بعد الخدمة.", "confirmBooking": "تأكيد الحجز",
+      "bookedTitle": "تم إرسال الحجز", "bookedBody": "سيؤكده الميكانيكي وستصلك إشعارات.", "seeBookings": "عرض حجوزاتي"
+    },
+    "sos": {
+      "title": "سحب", "accent": "الطوارئ", "guestSubtitle": "بدون حساب · شارك موقعك ونجد أقرب شاحنة",
+      "whereTitle": "أين أنت؟", "whereHelp": "استخدم موقعك أو اضغط على الخريطة لتحديد نقطة الالتقاء.",
+      "useMyLocation": "موقعي", "pickOnMap": "اختر على الخريطة", "geoUnsupported": "خدمة الموقع غير متاحة على هذا الجهاز.",
+      "geoDenied": "تعذّر تحديد موقعك. اضغط على الخريطة لتحديد النقطة.", "mapLabel": "خريطة نقطة الالتقاء",
+      "detailsTitle": "تفاصيل الطلب", "urgency": "الاستعجال", "urgent": "عاجل", "normal": "غير عاجل",
+      "address": "عنوان الالتقاء", "addressPh": "الطريق، معلم، علامة الكيلومتر", "destination": "السحب إلى (ورشة، منزل)",
+      "issue": "المشكلة", "moreDetails": "تفاصيل إضافية", "yourPhone": "رقم هاتفك", "phoneHelp": "سيتصل بك السائق على هذا الرقم.",
+      "issues": { "noStart": "المحرك لا يشتغل", "flat": "عجلة مثقوبة", "accident": "حادث", "overheat": "ارتفاع الحرارة", "battery": "البطارية فارغة", "other": "أخرى" },
+      "estimate": "تقدير ابتداءً من {{price}}", "estimateHelp": "رسوم أساسية مع المسافة. يؤكد السائق السعر النهائي. الدفع نقدًا للسائق.",
+      "send": "إرسال طلب الطوارئ", "needPosition": "حدد موقعك على الخريطة أولًا.", "hotline": "رقم الطوارئ",
+      "trackTitle": "التتبع", "trackAccent": "المباشر", "trackSubtitle": "تحديث كل 5 ثوانٍ",
+      "eta": "يصل خلال", "refreshNote": "يتحدث الموقع كل 5 ثوانٍ.", "progress": "التقدم",
+      "status": { "SEARCHING": "جارٍ البحث عن شاحنة", "ASSIGNED": "تم تعيين شاحنة", "EN_ROUTE": "في الطريق", "ARRIVED": "وصلت الشاحنة", "COMPLETED": "مكتمل", "CANCELLED": "ملغى", "NO_DRIVER": "لا يوجد سائق متاح بعد" },
+      "noDriverTitle": "لم تقبل أي شاحنة بعد", "noDriverBody": "يعيّن المنسّق شاحنة يدويًا. يمكنك أيضًا الاتصال برقم الطوارئ.",
+      "cancelledBody": "تم إلغاء هذا الطلب.", "yourDriver": "سائق السحب", "callDriver": "اتصال",
+      "requestTitle": "طلبك", "trackingCode": "رمز التتبع", "estimatedPrice": "السعر التقديري", "payment": "الدفع", "cashToDriver": "نقدًا للسائق",
+      "cancel": "إلغاء الطلب", "cancelTitle": "إلغاء طلب السحب؟", "cancelBody": "سيتم تحرير الشاحنة. يمكنك إرسال طلب جديد في أي وقت.",
+      "request": "طلب سحب", "requestSubtitle": "نرسل طلبك إلى أقرب شاحنة متاحة"
+    },
+    "how": {
+      "title": "كيف", "accent": "يعمل", "subtitle": "ثلاث خدمات، حساب واحد، الدفع عند الاستلام",
+      "parts1": "اختر مركبتك وابحث بالاسم أو المرجع.", "parts2": "قارن العروض: السعر، جديد أو مستعمل، الضمان.", "parts3": "اطلب وادفع نقدًا عند وصول القطع.",
+      "mech1": "جد ورشة موثّقة قريبة منك.", "mech2": "اختر خدمة وموعدًا متاحًا.", "mech3": "ادفع في الورشة بعد الإصلاح ثم قيّمها.",
+      "sos1": "شارك موقعك بدون حساب.", "sos2": "لأقرب شاحنة 30 ثانية للقبول.", "sos3": "تابع الشاحنة مباشرة وادفع للسائق."
+    },
+    "help": {
+      "title": "المساعدة", "accent": "والتواصل", "subtitle": "نجيب بالعربية والفرنسية والإنجليزية",
+      "call": "اتصل بنا", "callBody": "السحب الطارئ والأسئلة العاجلة، كل يوم.", "email": "راسلنا", "emailBody": "الطلبات والحسابات والشراكات. نرد خلال يوم عمل.",
+      "faq": "إجابات سريعة", "faqBody": "الدفع، رقم الهيكل، القطع المستعملة وأوقات السحب."
+    },
+    "legal": {
+      "updated": "آخر تحديث: نوفمبر 2026 · مشروع جامعي",
+      "terms": { "title": "شروط", "accent": "الاستخدام", "sections": [
+        { "h": "1. الخدمة", "p": "تربط DriveFix السائقين بموردي قطع الغيار والميكانيكيين وسائقي السحب في الجزائر. DriveFix ليست بائعة القطع ولا مقدّمة خدمة الإصلاح أو السحب." },
+        { "h": "2. الحسابات", "p": "رقم هاتفك الجزائري هو معرّف الدخول. يتحقق المدير من الموردين والميكانيكيين وسائقي السحب قبل استقبال الطلبات." },
+        { "h": "3. الأسعار والدفع", "p": "يحدد كل شريك أسعاره وتُعرض قبل التأكيد. الدفع عند الاستلام افتراضيًا. صفحة الدفع الإلكتروني تجريبية ولا تنقل أموالًا حقيقية." },
+        { "h": "4. القطع المستعملة", "p": "يجب أن تُعلن القطع المستعملة دائمًا مع حالتها وضمانها." },
+        { "h": "5. التقييمات", "p": "تقييم واحد لكل طلب مُسلّم أو حجز منتهٍ. تُحذف التقييمات المسيئة." }
+      ] },
+      "privacy": { "title": "الخصوصية", "accent": "والموافقة", "sections": [
+        { "h": "البيانات المحفوظة", "p": "اسمك ورقمك ولغتك، وطلباتك وحجوزاتك وطلبات السحب. كلمات المرور مشفّرة ولا تُعرض أبدًا." },
+        { "h": "موقعك", "p": "يُستخدم موقعك فقط أثناء طلب الطوارئ لإيجاد أقرب شاحنة وعرض التتبع." },
+        { "h": "من يرى ماذا", "p": "يرى الشريك فقط ما يلزم لخدمتك: اسمك ورقمك للطلب أو الحجز أو السحب." },
+        { "h": "حقوقك", "p": "يمكنك طلب الاطلاع على بياناتك أو تصحيحها أو حذفها عبر الدعم." }
+      ] }
+    },
+    "payments": {
+      "title": "دفع", "accent": "تجريبي", "subtitle": "تجريبي — لا أموال حقيقية", "amount": "المبلغ", "label": "مقابل", "expires": "ينتهي الرابط",
+      "demoBanner": "تجريبي — لا أموال حقيقية. هذه الصفحة تحاكي مزوّد دفع.", "succeed": "محاكاة النجاح", "fail": "محاكاة الفشل",
+      "paid": "تم استلام الدفع", "paidBody": "تم دفع طلبك. سيؤكده المورّد.", "failed": "فشل الدفع", "failedBody": "لم يُقتطع أي مبلغ. أعد المحاولة من طلبك أو ادفع نقدًا.",
+      "backToOrders": "العودة إلى طلباتي", "alreadySettled": "تمت تسوية هذا الدفع مسبقًا.",
+      "status": { "PENDING": "قيد الانتظار", "PAID": "مدفوع", "FAILED": "فاشل", "REFUNDED": "مسترجع" },
+      "method": { "CASH": "الدفع عند الاستلام", "SANDBOX": "إلكتروني (تجريبي)" }
+    }
+  }
+}
