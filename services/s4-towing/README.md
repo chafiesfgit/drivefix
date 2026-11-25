@@ -68,7 +68,8 @@ services/s4-towing/
   README.md                 this log
   TOWING_SERVICE.md         old brief, moved here unchanged (superseded)
   manage.py  requirements.txt  .env.example  .gitignore
-  setup.ps1  run.ps1  test.ps1  check.ps1
+  setup.ps1  run.ps1  test.ps1  check.ps1     Windows / PowerShell
+  setup.sh   run.sh   test.sh   check.sh      Linux / macOS (bash)
   config/          settings, urls, wsgi, asgi (port/env/CORS/DRF config)
   common/          auth (JWT), permissions, errors, handlers, pagination
   towing/          models, serializers, services (rules), views, urls, apps (expiry worker)
@@ -81,24 +82,40 @@ services/s4-towing/
 
 Only these paths were created/edited. No contract change, frontend change, or change to another service was made. This folder is committed locally on the `towing` branch; no push or PR has been made.
 
-## 5. Run it (Windows / PowerShell)
+## 5. Run it
+
+**Linux / macOS (bash):**
+
+```bash
+cd services/s4-towing
+./setup.sh        # venv + packages + .env + migrate + seed + tests (use PYTHON=python3.12 ./setup.sh to pick the interpreter)
+./run.sh          # http://localhost:4004
+```
+
+Other Linux commands:
+
+```bash
+./test.sh                         # 13 self-contained tests
+./check.sh                        # contract check (needs S1 running for tokens)
+./check.sh --write                # also runs the "Done when" scenario, then re-seeds
+source .venv/bin/activate && python manage.py seed --reset   # restore demo data manually
+```
+
+`check.sh` installs the checker's npm dependencies on first use; set `S4_URL` / `S1_URL` if the services are not on localhost.
+
+**Windows (PowerShell):** same operations through the equivalent wrappers:
 
 ```powershell
 cd services\s4-towing
-powershell -ExecutionPolicy Bypass -File .\setup.ps1   # venv + packages + .env + migrate + seed + tests
+powershell -ExecutionPolicy Bypass -File .\setup.ps1   # first time only
 .\run.ps1                                              # http://localhost:4004
-```
-
-Other commands:
-
-```powershell
-.\test.ps1                                             # 13 self-contained tests
-.\check.ps1                                            # contract check (needs S1 running for tokens)
-.\check.ps1 -Write                                     # also runs the "Done when" scenario, then re-seeds
+.\test.ps1                                             # 13 tests
+.\check.ps1                                            # needs S1 running for tokens
+.\check.ps1 -Write                                     # runs the "Done when" scenario, then re-seeds
 .\.venv\Scripts\python.exe manage.py seed --reset      # restore demo data manually
 ```
 
-For the real frontend instead of mocks, set `VITE_MOCK_S4=false` in `frontend/.env.local` (no frontend file was changed here) and start S1 for login tokens; S4 itself still makes no outbound calls.
+For the real frontend instead of mocks, set `VITE_MOCK_S4=false` in `frontend/.env.local` (no frontend file was changed here) and start S1 for login tokens; S4 itself still makes no outbound calls. On Linux, start S1 with `cd services/s1-identity && source .venv/bin/activate && python manage.py runserver 0.0.0.0:4001` and the frontend with `cd frontend && npm run dev`.
 
 ## 6. Seed data
 
@@ -110,13 +127,15 @@ For the real frontend instead of mocks, set `VITE_MOCK_S4=false` in `frontend/.e
 2. `manage.py test` — **13 tests, OK** (health, roles/auth, guest SOS, tracking-code access, availability/approval, first-accept-wins, decline chain to `NO_DRIVER`, lazy expiry, status flow, live tracking, cancellation, dispatch/fleet/manual assign, service-key callback, error envelope).
 3. Full contract checker (`tools/contract-check/lib/engine.mjs`) against the running service with `--write`: **25 PASS, 0 FAIL, 1 WARN**. The single WARN is the checker's standing reminder to re-seed after a write run; `manage.py seed --reset` was run again afterwards. All security sweeps (no/garbage/expired/wrong-secret token, wrong role, not approved, missing/wrong service key), reads, CORS preflight and the S4 "Done when" scenario passed.
    - The checker normally needs S1 to log in. To avoid starting or modifying a teammate's service, it was run from a **temporary copy in `/tmp/opencode`** with a tiny fake S1 that only mints HS256 tokens from the shared seed IDs/secret. Nothing in the repo outside this folder was written.
-4. `git status --short` shows only `services/s4-towing/` as new.
+4. Linux wrappers smoke-tested here: `./setup.sh` (13 tests OK), `./run.sh` + `GET /health` → 200 JSON.
+5. Only `services/s4-towing/` was changed; the work is committed locally on branch `towing` (no push/PR).
 
 Problems found and fixed during verification, kept here for the next teammate:
 
 - `path("")` in `towing/urls.py` only matched `/api/v1/`; the SOS route was shadowed by the detail route. Added the explicit `tows` prefix to every tow path.
 - Django 5 removed `django.utils.timezone.utc`; switched to `datetime.timezone.utc` in the ISO formatter.
 - `/track` sent `etaMinutes: null` when no driver was assigned, which the checker's JSON schema rejects. The optional field is now omitted until an ETA exists.
+- `runserver`'s auto-reloader calls `AppConfig.ready()` in both the watcher and the serving child, which started two expiry threads. The worker now starts only in the serving process (`RUN_MAIN=true`, or when `--noreload` is used).
 
 ## 8. Deliberately not done
 
