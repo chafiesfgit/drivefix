@@ -1,0 +1,6 @@
+# S4 Towing — no external database, no broker, no GIS library.
+Django>=5.0,<6
+djangorestframework>=3.15,<4
+PyJWT>=2.8,<3
+django-cors-headers>=4.3,<5
+python-dotenv>=1.0,<2

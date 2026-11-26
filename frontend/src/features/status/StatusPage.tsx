@@ -48,7 +48,7 @@ export function StatusPage() {
     }
   }
   const reset = () => {
-    for (const k of ['df.mockdb', 'df.cart', 'df.towJob', 'df.towHistory', 'df.towOnline']) {
+    for (const k of ['df.mockdb', 'df.cart', 'df.towJob', 'df.towHistory', 'df.towOnline', 'df.activeTow']) {
       try {
         localStorage.removeItem(k)
       } catch {
