@@ -45,15 +45,15 @@ def notify_user(payment):
 
 
 def callback_owner(payment):
-    """Tell S2 (order) or S4 (tow) that the payment changed.
-    PROPOSAL, to agree with the owners of S2 and S4: POST <base>/internal/payments/callback"""
+    """Tell S2 (order) or S4 (tow) that the payment changed (PAID or FAILED).
+    S2 contract: POST /internal/payments/{orderId}/result  body {status}
+    S4: same shape for now (to confirm with its owner)."""
+    if payment.status not in ("PAID", "FAILED"):
+        return
     base = settings.S2_URL if payment.ref_type == "ORDER" else settings.S4_URL
+    if not base:
+        return
     fire(
-        f"{base}/internal/payments/callback" if base else "",
-        {
-            "refType": payment.ref_type,
-            "refId": str(payment.ref_id),
-            "paymentId": str(payment.id),
-            "status": payment.status,
-        },
+        f"{base}/internal/payments/{payment.ref_id}/result",
+        {"status": payment.status},
     )
